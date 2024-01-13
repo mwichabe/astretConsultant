@@ -37,8 +37,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Text('Antonios Sports Lounge')),
+            scrollDirection: Axis.horizontal, child: Text('ASTRET APP')),
       ),
       drawer: const NavigationDrawer_(),
       body: IndexedStack(
@@ -53,16 +52,16 @@ class _HomeState extends State<Home> {
         showUnselectedLabels: false,
         backgroundColor: Colors.white,
         selectedItemColor: AppColor.secondaryColor,
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.building_2_fill),
             label: 'Services',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.pause_presentation),
             label: 'PaspPapers',
           ),

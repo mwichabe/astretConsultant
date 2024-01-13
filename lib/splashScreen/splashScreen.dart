@@ -1,4 +1,5 @@
 import 'package:astret/colors/colors.dart';
+import 'package:astret/signUp/signUp.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,13 +14,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Start the animation when the widget is first built.
     _startAnimation();
   }
 
   void _startAnimation() async {
-    await Future.delayed(
-        const Duration(seconds: 2)); // Adjust the delay duration
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       _containerSize = 300.0;
     });
@@ -48,12 +47,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   colors: [AppColor.primaryColor, AppColor.secondaryColor])),
           child: Center(
             child: AnimatedContainer(
-              duration: const Duration(seconds: 1), // Adjust the duration
+              duration: const Duration(seconds: 1),
               width: _containerSize,
               height: _containerSize,
-              child: ClipOval(
-                  child: Image.asset(
-                      'assets/Untitled.jpeg')), // Replace with your image
+              child: ClipOval(child: Image.asset('assets/Untitled.jpeg')),
             ),
           ));
     }));
