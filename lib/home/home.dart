@@ -44,29 +44,38 @@ class _HomeState extends State<Home> {
         index: _selectedIndex,
         children: _widgetOptions,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        backgroundColor: Colors.white,
-        selectedItemColor: AppColor.secondaryColor,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.transparent,
+            width: 2.0,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.building_2_fill),
-            label: 'Services',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pause_presentation),
-            label: 'PaspPapers',
-          ),
-        ],
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          backgroundColor: Colors.white,
+          selectedItemColor: AppColor.secondaryColor,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.building_2_fill),
+              label: 'Services',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.pause_presentation),
+              label: 'PaspPapers',
+            ),
+          ],
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
