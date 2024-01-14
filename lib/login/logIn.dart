@@ -28,7 +28,7 @@ class LoginScreen1 extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
+            children: [
               Expanded(
                 child: ClipPath(
                   clipper: MyClipper(),
@@ -45,10 +45,10 @@ class LoginScreen1 extends StatelessWidget {
                         children: [
                           ClipOval(
                             child: Image.asset(
-                              'assets/Untitled.jpeg',
+                              'assets/logIn.jpg',
                               fit: BoxFit.cover,
-                              width: 50.0,
-                              height: 50.0,
+                              width: 80.0,
+                              height: 80.0,
                             ),
                           ),
                         ],
