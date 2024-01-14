@@ -3,8 +3,6 @@ import 'package:astret/home/drawer/drawer.dart';
 import 'package:astret/home/homeTabs/home.dart';
 import 'package:astret/home/homeTabs/pastPapers/pastPapers.dart';
 import 'package:astret/home/homeTabs/services.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -15,9 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int friendRequestCount = 0;
-  int unreadMessageCount = 0;
-
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     // pages
@@ -66,11 +61,11 @@ class _HomeState extends State<Home> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.building_2_fill),
+              icon: Icon(Icons.business),
               label: 'Services',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.pause_presentation),
+              icon: Icon(Icons.article),
               label: 'PaspPapers',
             ),
           ],

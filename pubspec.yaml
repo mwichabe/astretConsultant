@@ -68,6 +68,10 @@ flutter:
     - assets/Untitled.jpeg
     - assets/singInBackground/full-bloom.png
     - assets/toB.png
+    - assets/gmail.jpg
+    - assets/phone.jpg
+    - assets/whatsApp.jpg
+
     
 
   #   - images/a_dot_ham.jpeg

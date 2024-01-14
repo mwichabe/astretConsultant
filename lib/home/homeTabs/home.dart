@@ -1,11 +1,12 @@
 import 'package:astret/colors/loaders.dart';
+import 'package:astret/home/homeTabs/homeWidgets/errorWidget.dart';
 import 'package:astret/home/homeTabs/homeWidgets/homeCard.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MainHome extends StatefulWidget {
-  const MainHome({Key? key});
+  const MainHome({super.key});
 
   @override
   State<MainHome> createState() => _MainHomeState();
@@ -42,7 +43,8 @@ class _MainHomeState extends State<MainHome> {
       }
     } catch (error) {
       print('Error fetching data: $error');
-      errorMessage = 'Failed to fetch data. Please try again later.';
+      errorMessage =
+          'Failed to fetch data. Please wait as we try to reconnect.';
     } finally {
       setState(() {
         isLoading = false;
@@ -57,7 +59,8 @@ class _MainHomeState extends State<MainHome> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const Center(
+            const Align(
+              alignment: Alignment.center,
               child: Text(
                 'Word from Astret App',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -66,7 +69,13 @@ class _MainHomeState extends State<MainHome> {
             if (isLoading)
               ColorLoader5()
             else if (errorMessage.isNotEmpty)
-              Text(errorMessage)
+              Column(
+                children: [
+                  Center(child: Text(errorMessage)),
+                  ColorLoader5(),
+                  SingleChildScrollView(child: ErrorCard())
+                ],
+              )
             else
               HomeCard(
                 text: quoteText,

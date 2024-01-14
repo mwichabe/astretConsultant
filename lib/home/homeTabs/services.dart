@@ -9,22 +9,59 @@ class Services extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        title: const Text('Services'),
+        centerTitle: true,
+        elevation: 1.0,
+        backgroundColor: Colors.white,
         actions: [
-          IconButton(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
               onPressed: () {
                 showDialog(
-                    context: context,
-                    builder: (context) => const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: AlertDialog(
-                            title: Text('Info'),
-                            content:
-                                Text('Long press on an item to make a call'),
+                  context: context,
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: AlertDialog(
+                      title: const Text(
+                        'Info',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      content: const Text(
+                        'Long press on an item to make a call',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            'OK',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ));
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
-              icon: const Icon(Icons.info))
+              icon: const Icon(
+                Icons.info,
+                color: Colors.green,
+                size: 30.0,
+              ),
+            ),
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -81,7 +118,7 @@ class Services extends StatelessWidget {
                       whatsApp();
                     },
                     child: Image.asset(
-                      'images/appLogos/whatsApp.png',
+                      'assets/whatsApp.jpg',
                       height: 60,
                     ),
                   ),
@@ -90,16 +127,17 @@ class Services extends StatelessWidget {
                       openMail();
                     },
                     child: Image.asset(
-                      'images/appLogos/gmail.jpg',
+                      'assets/gmail.jpg',
                       height: 60,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () => launchUrl(Uri.parse('tel:+254704858069')),
-                    icon: const Icon(
-                      Icons.phone,
-                      size: 60,
-                      color: Colors.green,
+                  InkWell(
+                    onTap: () {
+                      launchUrl(Uri.parse('tel:+254704858069'));
+                    },
+                    child: Image.asset(
+                      'assets/phone.jpg',
+                      height: 60,
                     ),
                   ),
                 ],
@@ -114,14 +152,14 @@ class Services extends StatelessWidget {
 
 openMail() {
   return launchUrl(Uri.parse(
-      'mailto:mwichabecollins@gmail.com?subject=Hello&body=Iam using Kibabii Library App and I would like to enquire about...)'));
+      'mailto:mwichabecollins@gmail.com?subject=Hello&body=Iam using Astret App and I would like to enquire about...)'));
 }
 
 whatsApp() {
   return launchUrl(
     Uri.parse(
-      'whatsapp://send?phone=+254704858069+&text=Hello, Iam using the Kibabbii Library App'
-      'application and I would like to enquire about...',
+      'whatsapp://send?phone=+254704858069+&text=Hello, Iam using Astret App'
+      ', I would like to enquire about...',
     ),
   );
 }
