@@ -2,6 +2,7 @@ import 'package:astret/colors/colors.dart';
 import 'package:astret/home/home.dart';
 import 'package:astret/login/logIn.dart';
 import 'package:astret/signUp/completeSignUp.dart';
+import 'package:astret/signUp/otp_UI.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {
@@ -270,7 +271,8 @@ class SignUp extends StatelessWidget {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const Home()))
+                                            builder: (context) =>
+                                                const OtpUI()))
                                   },
                                 ),
                               ),
@@ -281,7 +283,7 @@ class SignUp extends StatelessWidget {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Home()))
+                                  builder: (context) => const OtpUI()))
                         },
                       ),
                     ),
