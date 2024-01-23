@@ -123,7 +123,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const LogIn()));
+                                          builder: (context) =>
+                                              LoginScreen1()));
                                 },
                                 child: const Text(
                                   'SIGN IN PAGE',

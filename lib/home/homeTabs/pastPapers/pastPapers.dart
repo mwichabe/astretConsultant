@@ -26,7 +26,7 @@ class PastPapers extends StatelessWidget {
               PastPaperCard(
                   pastPaperName: 'Msc',
                   whenPressed: () {
-                    Navigator.pushReplacement(context,
+                    Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Msc()));
                   }),
               PastPaperCard(

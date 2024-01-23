@@ -22,12 +22,12 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              accountName: Text('your name will be here',
+              accountName: const Text('your name will be here',
                   //'${loggedInUser.yourName}',
-                  style: const TextStyle(color: Colors.white)),
-              accountEmail: Text('your email',
+                  style: TextStyle(color: Colors.white)),
+              accountEmail: const Text('your email',
                   //'${loggedInUser.email}',
-                  style: const TextStyle(color: Colors.white)),
+                  style: TextStyle(color: Colors.white)),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 radius: 70,
@@ -60,24 +60,28 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
               style: TextStyle(color: Colors.white),
             ),
             onTap: () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Home())),
+                context, MaterialPageRoute(builder: (context) => const Home())),
           ),
-          ListTile(
-            leading: const Icon(
+          const ListTile(
+            leading: Icon(
               Icons.person,
               color: Colors.white,
             ),
-            title: const Text('Profile', style: TextStyle(color: Colors.white)),
+            title: Text('Profile', style: TextStyle(color: Colors.white)),
             /*onTap: () => Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => Profile())
                 ),*/
           ),
           ListTile(
-            leading: const Icon(Icons.people, color: Colors.white),
-            title: const Text('Friends', style: TextStyle(color: Colors.white)),
-            /*onTap: () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Friends())
-                ),*/
+            leading: const Icon(
+              Icons.school,
+              color: Colors.white,
+            ),
+            title: const Text(
+              'Academic Research',
+              style: TextStyle(color: Colors.white),
+            ),
+            onTap: () {},
           ),
           ListTile(
               leading: const Icon(Icons.logout, color: Colors.white),
@@ -111,7 +115,8 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen1()));
+                                      builder: (context) =>
+                                          const LoginScreen1()));
 
                               // Navigate to the login screen
                             },

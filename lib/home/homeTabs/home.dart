@@ -73,7 +73,7 @@ class _MainHomeState extends State<MainHome> {
                 children: [
                   Center(child: Text(errorMessage)),
                   ColorLoader5(),
-                  SingleChildScrollView(child: ErrorCard())
+                  ErrorCard()
                 ],
               )
             else

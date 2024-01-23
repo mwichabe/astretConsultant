@@ -240,7 +240,7 @@ class SignUp extends StatelessWidget {
                           backgroundColor: primaryColor,
                         ),
                         child: Row(
-                          children: <Widget>[
+                          children: [
                             const Padding(
                               padding: EdgeInsets.only(left: 20.0),
                               child: Text(
