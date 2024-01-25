@@ -1,3 +1,4 @@
+import 'package:astret/home/drawer/academicResearch/academicResearch.dart';
 import 'package:astret/home/home.dart';
 import 'package:astret/login/logIn.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -78,10 +79,13 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
               color: Colors.white,
             ),
             title: const Text(
-              'Academic Research',
+              'Services',
               style: TextStyle(color: Colors.white),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => AcademicResearch()));
+            },
           ),
           ListTile(
               leading: const Icon(Icons.logout, color: Colors.white),
