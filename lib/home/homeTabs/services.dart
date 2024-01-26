@@ -9,7 +9,7 @@ class Services extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Services'),
+        title: const Text('Academic Research'),
         centerTitle: true,
         elevation: 1.0,
         backgroundColor: Colors.white,
