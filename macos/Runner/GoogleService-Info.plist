@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyD7CG2I7Gum10jBbQ2xT0ogKSr-OrlP7_A</string>
+	<key>GCM_SENDER_ID</key>
+	<string>448117077731</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.astret.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>asret-dc490</string>
+	<key>STORAGE_BUCKET</key>
+	<string>asret-dc490.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:448117077731:ios:d7c0c9c8fbd51977f877d6</string>
+</dict>
+</plist>

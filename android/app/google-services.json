@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "448117077731",
+    "project_id": "asret-dc490",
+    "storage_bucket": "asret-dc490.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448117077731:android:4e2220d47c35f3a2f877d6",
+        "android_client_info": {
+          "package_name": "com.example.astret"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA59iXP7WvP_ZxlF1o6gmlLZRQsYxqLgjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
