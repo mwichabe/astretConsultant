@@ -103,6 +103,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       Expanded(
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _nameEditingController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -149,6 +150,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       Expanded(
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _emailEditingController,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -156,6 +158,18 @@ class _SignUpState extends State<SignUp> {
                             hintText: 'Enter your email address',
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return ('Email field is required');
+                            }
+                            //regEx for email
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                .hasMatch(value)) {
+                              return ("Please Enter a valid email");
+                            }
+                            return null;
+                          },
                         ),
                       )
                     ],
@@ -202,6 +216,19 @@ class _SignUpState extends State<SignUp> {
                             hintText: 'Enter your Phone Number',
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Phone number is required';
+                            }
+
+                            // Regex for a phone number with a country code (e.g., +1234567890)
+                            if (!RegExp(r'^\+[1-9]\d{0,14}$').hasMatch(value)) {
+                              return 'Please enter a valid phone number with a country code';
+                            }
+
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                       )
                     ],
@@ -242,6 +269,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       Expanded(
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: _passwordEditingController,
                           obscureText: true,
                           decoration: InputDecoration(
@@ -249,6 +277,23 @@ class _SignUpState extends State<SignUp> {
                             hintText: 'Enter your Password ',
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
+                          validator: (value) {
+                            RegExp regex = RegExp(
+                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$@#&*~]).{6,}$');
+                            if (value!.isEmpty) {
+                              return ('Password field cannot be null');
+                            }
+                            //regEx for password field
+                            if (!regex.hasMatch(value)) {
+                              return ('Password should: \n'
+                                  ' Have at least 6 characters\n '
+                                  'Have a symbol \n'
+                                  'Have an uppercase \n'
+                                  'Have a numeric number \n'
+                                  'eg. Astret@1');
+                            }
+                            return null;
+                          },
                         ),
                       )
                     ],
@@ -368,7 +413,7 @@ class _SignUpState extends State<SignUp> {
                   margin: const EdgeInsets.only(top: 20.0),
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Row(
-                    children: <Widget>[
+                    children: [
                       Expanded(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
