@@ -1,8 +1,12 @@
 import 'package:astret/home/drawer/academicResearch/academicResearch.dart';
 import 'package:astret/home/home.dart';
 import 'package:astret/login/logIn.dart';
+import 'package:astret/models/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class NavigationDrawer_ extends StatefulWidget {
   const NavigationDrawer_({Key? key}) : super(key: key);
@@ -12,6 +16,24 @@ class NavigationDrawer_ extends StatefulWidget {
 }
 
 class _NavigationDrawer_State extends State<NavigationDrawer_> {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  UserModelOne loggedInUser = UserModelOne(uid: '');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModelOne.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -23,11 +45,9 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              accountName: const Text('your name will be here',
-                  //'${loggedInUser.yourName}',
+              accountName: Text('${loggedInUser.yourName}',
                   style: TextStyle(color: Colors.white)),
-              accountEmail: const Text('your email',
-                  //'${loggedInUser.email}',
+              accountEmail: Text('${loggedInUser.email}',
                   style: TextStyle(color: Colors.white)),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -116,13 +136,13 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
                           ),
                           TextButton(
                             onPressed: () async {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen1()));
-
-                              // Navigate to the login screen
+                              // Sign out from FirebaseAuth
+                              await FirebaseAuth.instance.signOut().then(
+                                  (value) => Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen1())));
                             },
                             child: const Text(
                               'Yes',
@@ -169,7 +189,16 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
                           ),
                           TextButton(
                             onPressed: () {
-                              //TO DO
+                              user?.delete().then((value) =>
+                                  Fluttertoast.showToast(
+                                          msg: 'Account deleted Successfully')
+                                      .then((value) =>
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const LoginScreen1()))));
+                              Navigator.of(context).pop();
                             },
                             child: const Text(
                               'Yes',

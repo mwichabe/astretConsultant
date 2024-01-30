@@ -392,9 +392,11 @@ class _SignUpState extends State<SignUp> {
                                         // splashColor: Colors.white,
                                         backgroundColor: Colors.white,
                                       ),
-                                      child: const Icon(
-                                        IconData(0xea90, fontFamily: 'icomoon'),
-                                        color: Color(0xff3b5998),
+                                      child: Text(
+                                        'G',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
                                       ),
                                       onPressed: () => {},
                                     ),

@@ -67,11 +67,6 @@ class MPPA extends StatelessWidget {
                     paperTile: 'APP 813: Conflict and Disaster Management',
                     onPressed: () {}),
                 PaperTile(
-                    paperTile: 'BBA 929: Marketing Seminar', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 930: Independent Study in Marketing',
-                    onPressed: () {}),
-                PaperTile(
                     paperTile:
                         'APP 814: Human Resource Management in Public Sector',
                     onPressed: () {}),
