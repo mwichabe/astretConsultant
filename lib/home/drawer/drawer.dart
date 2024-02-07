@@ -1,4 +1,5 @@
 import 'package:astret/home/drawer/academicResearch/academicResearch.dart';
+import 'package:astret/home/drawer/profile/profile.dart';
 import 'package:astret/home/home.dart';
 import 'package:astret/login/logIn.dart';
 import 'package:astret/models/user.dart';
@@ -46,17 +47,16 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
                 color: Colors.black,
               ),
               accountName: Text('${loggedInUser.yourName}',
-                  style: TextStyle(color: Colors.white)),
+                  style: const TextStyle(color: Colors.white)),
               accountEmail: Text('${loggedInUser.email}',
-                  style: TextStyle(color: Colors.white)),
+                  style: const TextStyle(color: Colors.white)),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 radius: 70,
                 child: ClipOval(
                   child: GestureDetector(
                     child: CachedNetworkImage(
-                      imageUrl: //loggedInUser.profilePictureUrl ??
-                          '',
+                      imageUrl: loggedInUser.profilePictureUrl ?? '',
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) => const Icon(
@@ -83,15 +83,14 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
             onTap: () => Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => const Home())),
           ),
-          const ListTile(
-            leading: Icon(
+          ListTile(
+            leading: const Icon(
               Icons.person,
               color: Colors.white,
             ),
-            title: Text('Profile', style: TextStyle(color: Colors.white)),
-            /*onTap: () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Profile())
-                ),*/
+            title: const Text('Profile', style: TextStyle(color: Colors.white)),
+            onTap: () => Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const Profile())),
           ),
           ListTile(
             leading: const Icon(
@@ -103,8 +102,10 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
               style: TextStyle(color: Colors.white),
             ),
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => AcademicResearch()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AcademicResearch()));
             },
           ),
           ListTile(
