@@ -1,5 +1,7 @@
 import 'package:astret/colors/loaders.dart';
+import 'package:astret/home/homeTabs/pastPapers/paperImage.dart';
 import 'package:astret/home/homeTabs/pastPapers/pastPaperWidgets/paperTile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Msc extends StatelessWidget {
@@ -13,44 +15,46 @@ class Msc extends StatelessWidget {
           centerTitle: true,
           elevation: 1,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                PaperTile(
-                    paperTile: 'BAC 816: Theory of Finance', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 839: Applied Statistics', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 820: Managerial Economics',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 817: Financial Intermediation',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 818: Financial Econometrics',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 819: Financial Analysis', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 820: Intermediation Finance',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 821: Finance Seminar', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BSU 805: Research Methods', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 822: Entrepreneurial Finance',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 824: Corporate Finance', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 826: International Moneyand Banking',
-                    onPressed: () {}),
-              ],
-            ),
-          ),
-        ));
+        body: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('msc').snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: ColorLoader5());
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return const Text(
+                    'Past Paper is yet to be uploaded be patient');
+              } else {
+                final eventDoc = snapshot.data!.docs;
+                return Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: ListView.builder(
+                      itemCount: eventDoc.length,
+                      itemBuilder: (context, index) {
+                        final pastPaper = eventDoc[index];
+                        final paperImageUrl = pastPaper['paperImageUrl'];
+                        final title = pastPaper['title'];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              PaperTile(
+                                  paperTile: title,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PaperImage(
+                                                title: title,
+                                                paperImageUrl: paperImageUrl)));
+                                  }),
+                            ],
+                          ),
+                        );
+                      }),
+                );
+              }
+            }));
   }
 }

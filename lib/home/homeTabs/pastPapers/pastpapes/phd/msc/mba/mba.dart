@@ -1,5 +1,7 @@
 import 'package:astret/colors/loaders.dart';
+import 'package:astret/home/homeTabs/pastPapers/paperImage.dart';
 import 'package:astret/home/homeTabs/pastPapers/pastPaperWidgets/paperTile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MBA extends StatelessWidget {
@@ -13,126 +15,46 @@ class MBA extends StatelessWidget {
           centerTitle: true,
           elevation: 1,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                PaperTile(
-                    paperTile: 'BBA 820: Managerial Functions',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 822: Human Resource Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 840: Marketing Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 813: Financial Accounting',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 840: Quantitative Techniques',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 823: Strategic Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 821: Managerial Economics',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 841: Management Information',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 814: Management Accounting',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 815: Financial Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BSU 805: Research Methods', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BSU 806: Research Project', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 843: Marketing Research', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 845: Strategic Marketing Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 848: Marketing Management Seminar',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 844: Marketing Communication Strategies',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 846: Global Marketing', onPressed: () {}),
-                PaperTile(
-                    paperTile:
-                        'BBA 825: Human Resources Employment and Development',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile:
-                        'BBA 860: Business Strategic Beehaviour and Leadership',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile:
-                        'BBA 861: Global Strategic Behaviour and Leadership',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 862: Strategic Management Seminar',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 831: Total Quality Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BBA 829: Management of Strategic Change',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 819: Financial Analysis', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 820: International FInance',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 821: Finance Seminar', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 822: Entrepreneurial Finance',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BAC 823: Corporate Finance', onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 842: Project Planning & organisation',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile:
-                        'BMS 843: Project Financing & Resource Scheduling',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 844: Project Monitoring & Evaluation',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 848: Operations Research I',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 849: Operations Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 845: Database Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 846: Database Communication & Networking',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 847: System Analysis & Design',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile: 'BMS 850: E-Commerce Systems Management',
-                    onPressed: () {}),
-                PaperTile(
-                    paperTile:
-                        'BMS 851: Advanced Management Information System',
-                    onPressed: () {}),
-              ],
-            ),
-          ),
-        ));
+        body: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('mba').snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: ColorLoader5());
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return const Text(
+                    'Past Paper is yet to be uploaded be patient');
+              } else {
+                final eventDoc = snapshot.data!.docs;
+                return Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: ListView.builder(
+                      itemCount: eventDoc.length,
+                      itemBuilder: (context, index) {
+                        final pastPaper = eventDoc[index];
+                        final paperImageUrl = pastPaper['paperImageUrl'];
+                        final title = pastPaper['title'];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              PaperTile(
+                                  paperTile: title,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PaperImage(
+                                                title: title,
+                                                paperImageUrl: paperImageUrl)));
+                                  }),
+                            ],
+                          ),
+                        );
+                      }),
+                );
+              }
+            }));
   }
 }
