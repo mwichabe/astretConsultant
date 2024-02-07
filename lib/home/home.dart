@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.business),
-              label: 'Academic \n Services',
+              label: 'Academic \n Research',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.article),
