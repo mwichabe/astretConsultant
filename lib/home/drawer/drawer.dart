@@ -46,9 +46,9 @@ class _NavigationDrawer_State extends State<NavigationDrawer_> {
               decoration: const BoxDecoration(
                 color: Colors.black,
               ),
-              accountName: Text('${loggedInUser.yourName}',
+              accountName: Text('${loggedInUser.yourName}' ?? 'Loading...',
                   style: const TextStyle(color: Colors.white)),
-              accountEmail: Text('${loggedInUser.email}',
+              accountEmail: Text('${loggedInUser.email}' ?? 'Loading ...',
                   style: const TextStyle(color: Colors.white)),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
