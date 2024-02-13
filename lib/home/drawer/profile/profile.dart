@@ -98,7 +98,7 @@ class _ProfileState extends State<Profile> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 0.0,
-            //backgroundColor: AppColor.primaryColor,
+            backgroundColor: AppColor.primaryColor,
             actions: [
               IconButton(
                 icon: const Icon(

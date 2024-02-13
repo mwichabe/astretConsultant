@@ -1,4 +1,5 @@
 import 'package:astret/colors/colors.dart';
+import 'package:astret/provider/statemanagement.dart';
 import 'package:astret/signUp/signUp.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Navigate to the next screen when the animation is done.
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const SignUp(),
+        builder: (context) => const StateManager(),
       ),
     );
   }
