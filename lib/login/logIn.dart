@@ -1,9 +1,11 @@
+import 'package:astret/colors/colors.dart';
 import 'package:astret/home/home.dart';
 import 'package:astret/signUp/signUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginScreen1 extends StatefulWidget {
   final Color? primaryColor;
@@ -258,58 +260,13 @@ class _LoginScreen1State extends State<LoginScreen1> {
                 Container(
                   margin: const EdgeInsets.only(top: 10.0),
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0)),
-                            //splashColor: Color(0xFF3B5998),
-                            backgroundColor: const Color(0xff3B5998),
-                          ),
-                          child: SingleChildScrollView(
-                            child: Row(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  child: Text(
-                                    "LOGIN WITH GOOGLE",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                                Transform.translate(
-                                  offset: const Offset(15.0, 0.0),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(28.0)),
-                                        // splashColor: Colors.white,
-                                        backgroundColor: Colors.white,
-                                      ),
-                                      child: Text(
-                                        'G',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      onPressed: () => {},
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          onPressed: () => {},
-                        ),
-                      ),
-                    ],
+                  width: double.infinity,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                  child: SignInButton(
+                    Buttons.google,
+                    text: 'Sign In With Google',
+                    onPressed: () {},
                   ),
                 ),
                 Container(

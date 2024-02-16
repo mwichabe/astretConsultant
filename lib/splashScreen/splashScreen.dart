@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     await Future.delayed(
-        const Duration(seconds: 1)); // Adjust the delay duration
+        const Duration(seconds: 1));
     // Navigate to the next screen when the animation is done.
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(

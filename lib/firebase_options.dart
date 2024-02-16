@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '448117077731',
     projectId: 'asret-dc490',
     storageBucket: 'asret-dc490.appspot.com',
+    iosClientId: '448117077731-b7c6ihrgjgq3b1uk1g7c73stk372bhil.apps.googleusercontent.com',
     iosBundleId: 'com.example.astret',
   );
 
@@ -75,6 +76,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '448117077731',
     projectId: 'asret-dc490',
     storageBucket: 'asret-dc490.appspot.com',
+    iosClientId: '448117077731-tm9b6scp482gvf0k8rik75t7jra7te2k.apps.googleusercontent.com',
     iosBundleId: 'com.example.astret.RunnerTests',
   );
 }
