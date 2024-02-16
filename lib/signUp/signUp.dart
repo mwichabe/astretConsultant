@@ -8,6 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class SignUp extends StatefulWidget {
   final Color? primaryColor;
@@ -26,6 +28,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   bool isLoading = false;
   final _auth = FirebaseAuth.instance;
   //form key
@@ -357,58 +360,13 @@ class _SignUpState extends State<SignUp> {
                 Container(
                   margin: const EdgeInsets.only(top: 10.0),
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0)),
-                            //splashColor: Color(0xFF3B5998),
-                            backgroundColor: const Color(0xff4285F4),
-                          ),
-                          child: SingleChildScrollView(
-                            child: Row(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  child: Text(
-                                    "SIGN UP WITH GOOGLE",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                                Transform.translate(
-                                  offset: const Offset(15.0, 0.0),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(28.0)),
-                                        // splashColor: Colors.white,
-                                        backgroundColor: Colors.white,
-                                      ),
-                                      child: Text(
-                                        'G',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      onPressed: () => {},
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          onPressed: () => {},
-                        ),
-                      ),
-                    ],
+                  width: double.infinity,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                  child: SignInButton(
+                    Buttons.google,
+                    text: 'Sign Up With Google',
+                    onPressed: _signUpWithGoogle,
                   ),
                 ),
                 Container(
@@ -532,6 +490,79 @@ class _SignUpState extends State<SignUp> {
           isLoading = false;
         });
       }
+    }
+  }
+
+  Future<void> _signUpWithGoogle() async {
+    try {
+      // Trigger the Google Sign In flow.
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        // Obtain the GoogleSignInAuthentication object.
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        // Create a new credential.
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        // Sign in to Firebase with the Google credentials.
+        final UserCredential authResult =
+            await _auth.signInWithCredential(credential);
+
+        // Get the user object from the auth result.
+        final User? user = authResult.user;
+
+        if (user != null) {
+          // Extract user's email and name from the Google user profile.
+          final String? userEmail = user.email;
+          final String? userName = user.displayName;
+          final String? userPhone = user.phoneNumber;
+          final String? userImage = user.photoURL;
+
+          // Save user data to Firestore.
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
+            'yourName': userName,
+            'email': userEmail,
+            'phoneNumber': userPhone,
+            'profilePictureUrl': userImage
+          });
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+
+          // Show success message
+          Fluttertoast.showToast(
+            msg: 'Sign up with Google successful',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.green,
+            timeInSecForIosWeb: 1,
+            fontSize: 16,
+          );
+        }
+      }
+    } catch (error) {
+      // Handle sign-up errors.
+      print('Error signing up with Google: $error');
+
+      // Show error message
+      Fluttertoast.showToast(
+        msg: 'Sign up with Google failed',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        timeInSecForIosWeb: 1,
+        fontSize: 16,
+      );
     }
   }
 }

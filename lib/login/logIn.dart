@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:astret/colors/colors.dart';
 import 'package:astret/home/home.dart';
 import 'package:astret/signUp/signUp.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginScreen1 extends StatefulWidget {
@@ -266,7 +269,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
                   child: SignInButton(
                     Buttons.google,
                     text: 'Sign In With Google',
-                    onPressed: () {},
+                    onPressed: _signInWithGoogle,
                   ),
                 ),
                 Container(
@@ -313,6 +316,59 @@ class _LoginScreen1State extends State<LoginScreen1> {
     );
   }
 
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential authResult =
+            await _auth.signInWithCredential(credential);
+        final User? user = authResult.user;
+
+        // Check if user is not null
+        if (user != null) {
+          // Navigate to the home screen after successful sign-in
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+
+          // Show success message
+          Fluttertoast.showToast(
+            msg: 'Sign in with Google successful',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.green,
+            timeInSecForIosWeb: 1,
+            fontSize: 16,
+          );
+        }
+      }
+    } catch (error) {
+      // Handle sign-in error
+      log(error.toString());
+
+      // Show error message
+      Fluttertoast.showToast(
+        msg: 'Sign in with Google failed',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        timeInSecForIosWeb: 1,
+        fontSize: 16,
+      );
+    }
+  }
+
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -343,7 +399,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
           fontSize: 16,
         );
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
 
         setState(() {
           isLoading = false;
