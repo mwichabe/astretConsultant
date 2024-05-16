@@ -133,7 +133,7 @@ class Services extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      launchUrl(Uri.parse('tel:+254704858069'));
+                      launchUrl(Uri.parse('tel:+254798999241'));
                     },
                     child: Image.asset(
                       'assets/phone.jpg',
@@ -152,13 +152,13 @@ class Services extends StatelessWidget {
 
 openMail() {
   return launchUrl(Uri.parse(
-      'mailto:mwichabecollins@gmail.com?subject=Hello&body=Iam using Astret App and I would like to enquire about...)'));
+      'mailto:asretconsultants@gmail.comsubject=Hello&body=Iam using Astret App and I would like to enquire about...)'));
 }
 
 whatsApp() {
   return launchUrl(
     Uri.parse(
-      'whatsapp://send?phone=+254704858069+&text=Hello, Iam using Astret App'
+      'whatsapp://send?phone=+254798999241+&text=Hello, Iam using Astret App'
       ', I would like to enquire about...',
     ),
   );

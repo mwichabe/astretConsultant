@@ -193,7 +193,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
                                   'Have a symbol \n'
                                   'Have an uppercase \n'
                                   'Have a numeric number \n'
-                                  'eg. Sherehe@1');
+                                  'eg. Astret@1');
                             }
                             return null;
                           },
@@ -258,18 +258,6 @@ class _LoginScreen1State extends State<LoginScreen1> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  width: double.infinity,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-                  child: SignInButton(
-                    Buttons.google,
-                    text: 'Sign In With Google',
-                    onPressed: _signInWithGoogle,
                   ),
                 ),
                 Container(

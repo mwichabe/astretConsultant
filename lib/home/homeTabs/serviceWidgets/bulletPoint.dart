@@ -9,7 +9,7 @@ class BulletPoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onLongPress: () => launchUrl(Uri.parse('tel:+254704858069')),
+      onLongPress: () => launchUrl(Uri.parse('tel:+254798999241')),
       child: Card(
         elevation: 2.0,
         child: Padding(

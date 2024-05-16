@@ -358,18 +358,6 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 10.0),
-                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  width: double.infinity,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-                  child: SignInButton(
-                    Buttons.google,
-                    text: 'Sign Up With Google',
-                    onPressed: _signUpWithGoogle,
-                  ),
-                ),
-                Container(
                   margin: const EdgeInsets.only(top: 20.0),
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Row(

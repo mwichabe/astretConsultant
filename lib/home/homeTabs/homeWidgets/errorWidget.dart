@@ -32,7 +32,7 @@ class ErrorCard extends StatelessWidget {
                   color: Colors.blue.shade100),
               child: TextButton(
                   onPressed: () {
-                    launchUrl(Uri.parse('tel:+254704858069'));
+                    launchUrl(Uri.parse('tel:+254798999241'));
                   },
                   child: const Text('Call Us')),
             )
